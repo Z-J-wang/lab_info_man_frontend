@@ -10,8 +10,8 @@
     "build": "node build/build.js",
     "lint": "yarn lint:eslint && yarn lint:stylelint",
     "lint:fix": "yarn lint:eslint --fix && yarn lint:stylelint --fix",
-    "lint:eslint": "eslint --config .eslintrc.js --ext .js,.vue,.html,.ts ./",
-    "lint:stylelint": "stylelint --config .stylelintrc.js ./**/*.{html,js,ts,vue,css,sass,scss,less}"
+    "lint:eslint": "eslint --config .eslintrc.js --ext .js,.vue,.html,.ts --ignore-path .eslintignore ./",
+    "lint:stylelint": "stylelint --config .stylelintrc.js --ignore-path .stylelintignore ./**/*.{html,vue,js,ts,css,sass,scss,less}"
   },
   "dependencies": {
     "axios": "^0.18.0",
@@ -29,7 +29,6 @@
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
-    "babel-core": "^6.22.1",
     "babel-eslint": "^10.1.0",
     "babel-helper-vue-jsx-merge-props": "^2.0.3",
     "babel-loader": "^7.1.1",
@@ -42,12 +41,9 @@
     "copy-webpack-plugin": "^4.0.1",
     "css-loader": "^0.28.0",
     "eslint": "^7.32.0",
+    "eslint-loader": "^3.0.3",
     "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-import": "^2.20.2",
-    "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^4.0.0",
-    "eslint-plugin-promise": "^4.2.1",
-    "eslint-plugin-standard": "^4.0.0",
     "eslint-plugin-vue": "^6.2.2",
     "file-loader": "^1.1.4",
     "friendly-errors-webpack-plugin": "^1.6.1",

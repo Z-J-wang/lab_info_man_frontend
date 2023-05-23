@@ -10,11 +10,11 @@
 
 <script>
 export default {
-  name: 'message-tip',
-  data () {
+  name: 'MessageTip',
+  data() {
     return {
       value: 0
-    }
+    };
   }
-}
+};
 </script>

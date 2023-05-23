@@ -6,6 +6,6 @@
 
 <script>
 export default {
-  name: 'ownspace'
-}
+  name: 'Ownspace'
+};
 </script>

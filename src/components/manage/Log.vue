@@ -6,6 +6,6 @@
 
 <script>
 export default {
-  name: 'log'
-}
+  name: 'Log'
+};
 </script>

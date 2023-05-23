@@ -2,7 +2,7 @@
   <div class="wrapper">
     <!-- 流程图 -->
     <Row :gutter="10">
-      <Col :md="{span: 24}">
+      <Col :md="{ span: 24 }">
         <Card style="text-align: left;">
           <template slot="title">
             <span style="font-weight: 700;">
@@ -17,21 +17,21 @@
       </Col>
     </Row>
     <!-- 详情与操作 -->
-    <Row :gutter="1" style="text-align: left; margin: 5px 0;">
-      <Col :md="{span: 24}">
+    <Row :gutter="1" style=" margin: 5px 0; text-align: left;">
+      <Col :md="{ span: 24 }">
         <Card id="ticket-detail">
           <template slot="title">
             <span style="font-weight: 700;">
               <Icon type="android-clipboard"></Icon>
-              <span>{{workflow.description}}</span>
+              <span>{{ workflow.description }}</span>
             </span>
           </template>
           <Row>
-            <Form :model="detailForm" ref="detailForm" :rules="detailFormRules" :label-width="150">
+            <Form ref="detailForm" :model="detailForm" :rules="detailFormRules" :label-width="150">
               <Col
                 v-for="(field, index) in shortFieldList"
                 :key="index"
-                :md="{span: field.field_type_id === 55 ? 22 : 11}"
+                :md="{ span: field.field_type_id === 55 ? 22 : 11 }"
               >
                 <template v-if="field.field_attribute === 2">
                   <FormItem
@@ -79,11 +79,9 @@
                       multiple
                       :placeholder="$t(`field_label.${field.field_key}`)"
                     >
-                      <Option
-                        v-for="(choice, i) in Object.keys(field.field_choice)"
-                        :key="i"
-                        :value="choice"
-                      >{{field.field_choice[choice]}}</Option>
+                      <Option v-for="(choice, i) in Object.keys(field.field_choice)" :key="i" :value="choice">{{
+                        field.field_choice[choice]
+                      }}</Option>
                     </Select>
                   </FormItem>
                   <FormItem
@@ -91,15 +89,10 @@
                     :prop="field.field_key"
                     :label="field.name || field.field_name"
                   >
-                    <Select
-                      v-model="detailForm[field.field_key]"
-                      :placeholder="$t(`field_label.${field.field_key}`)"
-                    >
-                      <Option
-                        v-for="(choice, i) in Object.keys(field.field_choice)"
-                        :key="i"
-                        :value="choice"
-                      >{{field.field_choice[choice]}}</Option>
+                    <Select v-model="detailForm[field.field_key]" :placeholder="$t(`field_label.${field.field_key}`)">
+                      <Option v-for="(choice, i) in Object.keys(field.field_choice)" :key="i" :value="choice">{{
+                        field.field_choice[choice]
+                      }}</Option>
                     </Select>
                   </FormItem>
                   <FormItem
@@ -107,15 +100,10 @@
                     :prop="field.field_key"
                     :label="field.name || field.field_name"
                   >
-                    <Select
-                      v-model="detailForm[field.field_key]"
-                      :placeholder="$t(`field_label.${field.field_key}`)"
-                    >
-                      <Option
-                        v-for="(user, index) in accountList"
-                        :key="index"
-                        :value="user.username"
-                      >{{user.alias}}</Option>
+                    <Select v-model="detailForm[field.field_key]" :placeholder="$t(`field_label.${field.field_key}`)">
+                      <Option v-for="(user, index) in accountList" :key="index" :value="user.username">{{
+                        user.alias
+                      }}</Option>
                     </Select>
                   </FormItem>
                   <FormItem
@@ -123,7 +111,7 @@
                     :prop="field.field_key"
                     :label="field.name || field.field_name"
                   >
-                    <tinymce v-model="detailForm[field.field_key]" :id="field.field_key" ref="tm"></tinymce>
+                    <tinymce :id="field.field_key" ref="tm" v-model="detailForm[field.field_key]"></tinymce>
                   </FormItem>
                 </template>
                 <template v-else-if="field.field_attribute === 1">
@@ -132,19 +120,20 @@
                   </FormItem>
                 </template>
               </Col>
-              <Col :md="{span: 22}" v-if="transitions.length > 0">
+              <Col v-if="transitions.length > 0" :md="{ span: 22 }">
                 <FormItem label="处理意见" :prop="detailForm['suggestion']">
-                  <Input type="textarea" v-model="suggestion" placeholder="请输入处理意见"></Input>
+                  <Input v-model="suggestion" type="textarea" placeholder="请输入处理意见"></Input>
                 </FormItem>
               </Col>
-              <Col :md="{span: 24, offset: 2}">
+              <Col :md="{ span: 24, offset: 2 }">
                 <Button
                   v-for="(btn, index) in transitions"
                   :key="index"
                   type="primary"
-                  style="margin: 10px 10px;"
+                  style="margin: 10px;"
                   @click="handleTicketTransition('detailForm', btn)"
-                >{{btn.transition_name}}</Button>
+                  >{{ btn.transition_name }}</Button
+                >
               </Col>
             </Form>
           </Row>
@@ -153,7 +142,7 @@
     </Row>
     <!-- 日志 -->
     <Row :gutter="10">
-      <Col :md="{span: 24}">
+      <Col :md="{ span: 24 }">
         <Card style="text-align: left;">
           <template slot="title">
             <span style="font-weight: 700;">
@@ -169,12 +158,12 @@
 </template>
 
 <script>
-import Utils from "../../utils";
-import Validators from "../../utils/validators";
-import { Date } from "../../utils/datetime";
+import Utils from '../../utils';
+import Validators from '../../utils/validators';
+import { Date } from '../../utils/datetime';
 
 export default {
-  name: "ticket-detail",
+  name: 'TicketDetail',
   data() {
     return {
       ticket: {},
@@ -182,35 +171,29 @@ export default {
       logtable: {
         columns: [
           {
-            key: "state",
-            title: "节点名称",
-            align: "center",
+            key: 'state',
+            title: '节点名称',
+            align: 'center',
             render: (h, params) => {
-              return h("div", [h("span", {}, params.row.state.state_name)]);
+              return h('div', [h('span', {}, params.row.state.state_name)]);
             }
           },
           {
-            key: "participant",
-            title: "参与者",
-            align: "center"
+            key: 'participant',
+            title: '参与者',
+            align: 'center'
           },
           {
-            key: "gmt_created",
-            title: "操作时间",
-            align: "center"
+            key: 'gmt_created',
+            title: '操作时间',
+            align: 'center'
           },
           {
-            key: "suggestion",
-            title: "处理意见",
-            align: "center",
+            key: 'suggestion',
+            title: '处理意见',
+            align: 'center',
             render: (h, params) => {
-              return h("div", [
-                h(
-                  "span",
-                  {},
-                  params.row.suggestion ? params.row.suggestion : "——"
-                )
-              ]);
+              return h('div', [h('span', {}, params.row.suggestion ? params.row.suggestion : '——')]);
             }
           }
         ],
@@ -219,119 +202,13 @@ export default {
       accountList: [],
       steps: [],
       currentStep: 1,
-      cardHeight: "",
+      cardHeight: '',
       stepTransition: {},
       transitions: [],
-      suggestion: "",
+      suggestion: '',
       detailForm: {},
       detailFormRules: {}
     };
-  },
-  methods: {
-    init() {
-      this.$store
-        .dispatch("api_get_ticket_detail", { id: this.ticket_id })
-        .then(resp => {
-          this.ticket = resp.data.data.value;
-          const workflow_id = this.ticket.workflow_id;
-          this.$store.dispatch("api_workflows").then(resp => {
-            let workflows = resp.data.data.value;
-            this.workflow = workflows.filter(item => {
-              if (item.id === workflow_id) {
-                return true;
-              }
-            })[0];
-          });
-          this.$store
-            .dispatch("api_get_ticket_transiton_list", { id: this.ticket.id })
-            .then(resp => {
-              this.logtable.data = resp.data.data.value;
-            });
-          this.$store
-            .dispatch("api_get_ticket_step_list", { id: this.ticket.id })
-            .then(resp => {
-              this.steps = resp.data.data.value;
-            });
-          this.$store
-            .dispatch("api_get_ticket_transitions", { id: this.ticket.id })
-            .then(resp => {
-              this.transitions = resp.data.data.value;
-            })
-            .catch(error => {
-              this.$Notice.info({ title: "当前状态您无法处理该工单" });
-            });
-          this.$store.dispatch("api_fetch_account_list").then(resp => {
-            this.accountList = resp.data.data;
-          });
-        })
-        .catch(error => {
-          this.$Notice.error({ title: "接口错误或数据不存在！" });
-        });
-    },
-    handleTicketTransition(formName, btn) {
-      // console.log(this.detailForm, this.detailFormRules, btn)
-      this.$refs[formName].validate(valid => {
-        if (valid) {
-          let data = {
-            id: this.ticket.id,
-            data: {
-              transition_id: btn.transition_id,
-              suggestion: this.suggestion
-                ? this.suggestion
-                : btn.transition_name
-            }
-          };
-          let formData = {};
-          let detailFormKeys = Object.keys(this.detailForm);
-          let fieldList = this.ticket.field_list;
-          for (let i = 0; i < fieldList.length; i++) {
-            for (let j = 0; j < detailFormKeys.length; j++) {
-              if (
-                [25, 30].includes(fieldList[i].field_type_id) &&
-                fieldList[i].field_key === detailFormKeys[j]
-              ) {
-                this.detailForm[detailFormKeys[j]] = this.detailForm[
-                  detailFormKeys[j]
-                ].format("yyyy-MM-dd hh:mm:ss");
-              }
-            }
-          }
-          Object.assign(data.data, this.detailForm);
-          this.$store
-            .dispatch("api_handle_ticket_action", data)
-            .then(resp => {
-              this.$Notice.success({ title: "处理成功" });
-              this.$router.push({ name: "todo" });
-            })
-            .catch(error => {
-              this.$Notice.error({ title: "工单处理失败" });
-              console.log(error);
-            });
-        } else {
-          console.log("form error");
-          return false;
-        }
-      });
-      if (Object.keys(this.detailForm).length === 0) {
-        let data = {
-          id: this.ticket.id,
-          data: {
-            transition_id: btn.transition_id,
-            suggestion: this.suggestion ? this.suggestion : btn.transition_name
-          }
-        };
-        this.$store
-          .dispatch("api_handle_ticket_action", data)
-          .then(resp => {
-            this.$Notice.success({ title: "处理成功" });
-            this.$router.push({ name: "todo" });
-          })
-          .catch(error => {
-            this.$Notice.error({ title: "工单处理失败" });
-            console.log(error);
-          });
-      }
-    }
   },
   computed: {
     ticket_id() {
@@ -345,16 +222,8 @@ export default {
         return argument.field_value;
       };
     },
-    displaySelectKey(argument) {
-      return argument => {
-        if (argument.field_type_id === 45) {
-          return argument.field_choice[argument.field_value];
-        }
-        return argument.field_value;
-      };
-    },
-    choiceFieldDisplay () {
-      let result
+    choiceFieldDisplay() {
+      let result;
       this.ticket.field_list.filter(item => {
         if (item.field_type_id === 35) {
           let keys = Object.keys(item.field_choice);
@@ -364,12 +233,13 @@ export default {
             }
           }
           if (!result) {
-            result = "——";
+            result = '——';
           }
         }
       });
       return result;
     },
+    // eslint-disable-next-line vue/return-in-computed-property
     shortFieldList() {
       if (this.ticket && this.ticket.field_list) {
         let result = [];
@@ -419,29 +289,18 @@ export default {
       for (let i = 0; i < fieldList.length; i++) {
         if (fieldList[i].field_attribute === 2) {
           // 动态设置detailForm表单默认值
-          this.detailForm[fieldList[i].field_key] =
-            fieldList[i].value || fieldList[i].field_value;
+          this.detailForm[fieldList[i].field_key] = fieldList[i].value || fieldList[i].field_value;
           // 动态设置detailForm表单验证
           if ([5, 35, 45, 55, 60].includes(fieldList[i].field_type_id)) {
-            this.detailFormRules[fieldList[i].field_key] = [
-              { required: true, type: "string", trigger: "blur" }
-            ];
+            this.detailFormRules[fieldList[i].field_key] = [{ required: true, type: 'string', trigger: 'blur' }];
           } else if ([25, 30].includes(fieldList[i].field_type_id)) {
-            this.detailFormRules[fieldList[i].field_key] = [
-              { required: true, type: "date", trigger: "blur" }
-            ];
+            this.detailFormRules[fieldList[i].field_key] = [{ required: true, type: 'date', trigger: 'blur' }];
           } else if ([40, 50, 70].includes(fieldList[i].field_type_id)) {
-            this.detailFormRules[fieldList[i].field_key] = [
-              { required: true, type: "array", trigger: "blur" }
-            ];
+            this.detailFormRules[fieldList[i].field_key] = [{ required: true, type: 'array', trigger: 'blur' }];
           } else if ([10, 15].includes(fieldList[i].field_type_id)) {
-            this.detailFormRules[fieldList[i].field_key] = [
-              { required: true, type: "number", trigger: "blur" }
-            ];
+            this.detailFormRules[fieldList[i].field_key] = [{ required: true, type: 'number', trigger: 'blur' }];
           } else if (fieldList[i].field_type_id === 20) {
-            this.detailFormRules[fieldList[i].field_type_id] = [
-              { required: true, type: "boolean", trigger: "blur" }
-            ];
+            this.detailFormRules[fieldList[i].field_type_id] = [{ required: true, type: 'boolean', trigger: 'blur' }];
           }
         }
       }
@@ -449,6 +308,101 @@ export default {
   },
   mounted() {
     this.init();
+  },
+  methods: {
+    init() {
+      this.$store
+        .dispatch('api_get_ticket_detail', { id: this.ticket_id })
+        .then(resp => {
+          this.ticket = resp.data.data.value;
+          const workflow_id = this.ticket.workflow_id;
+          this.$store.dispatch('api_workflows').then(resp => {
+            let workflows = resp.data.data.value;
+            this.workflow = workflows.filter(item => {
+              if (item.id === workflow_id) {
+                return true;
+              }
+            })[0];
+          });
+          this.$store.dispatch('api_get_ticket_transiton_list', { id: this.ticket.id }).then(resp => {
+            this.logtable.data = resp.data.data.value;
+          });
+          this.$store.dispatch('api_get_ticket_step_list', { id: this.ticket.id }).then(resp => {
+            this.steps = resp.data.data.value;
+          });
+          this.$store
+            .dispatch('api_get_ticket_transitions', { id: this.ticket.id })
+            .then(resp => {
+              this.transitions = resp.data.data.value;
+            })
+            .catch(error => {
+              this.$Notice.info({ title: '当前状态您无法处理该工单' });
+            });
+          this.$store.dispatch('api_fetch_account_list').then(resp => {
+            this.accountList = resp.data.data;
+          });
+        })
+        .catch(error => {
+          this.$Notice.error({ title: '接口错误或数据不存在！' });
+        });
+    },
+    handleTicketTransition(formName, btn) {
+      // console.log(this.detailForm, this.detailFormRules, btn)
+      this.$refs[formName].validate(valid => {
+        if (valid) {
+          let data = {
+            id: this.ticket.id,
+            data: {
+              transition_id: btn.transition_id,
+              suggestion: this.suggestion ? this.suggestion : btn.transition_name
+            }
+          };
+          let formData = {};
+          let detailFormKeys = Object.keys(this.detailForm);
+          let fieldList = this.ticket.field_list;
+          for (let i = 0; i < fieldList.length; i++) {
+            for (let j = 0; j < detailFormKeys.length; j++) {
+              if ([25, 30].includes(fieldList[i].field_type_id) && fieldList[i].field_key === detailFormKeys[j]) {
+                this.detailForm[detailFormKeys[j]] = this.detailForm[detailFormKeys[j]].format('yyyy-MM-dd hh:mm:ss');
+              }
+            }
+          }
+          Object.assign(data.data, this.detailForm);
+          this.$store
+            .dispatch('api_handle_ticket_action', data)
+            .then(resp => {
+              this.$Notice.success({ title: '处理成功' });
+              this.$router.push({ name: 'todo' });
+            })
+            .catch(error => {
+              this.$Notice.error({ title: '工单处理失败' });
+              console.log(error);
+            });
+        } else {
+          console.log('form error');
+          return false;
+        }
+      });
+      if (Object.keys(this.detailForm).length === 0) {
+        let data = {
+          id: this.ticket.id,
+          data: {
+            transition_id: btn.transition_id,
+            suggestion: this.suggestion ? this.suggestion : btn.transition_name
+          }
+        };
+        this.$store
+          .dispatch('api_handle_ticket_action', data)
+          .then(resp => {
+            this.$Notice.success({ title: '处理成功' });
+            this.$router.push({ name: 'todo' });
+          })
+          .catch(error => {
+            this.$Notice.error({ title: '工单处理失败' });
+            console.log(error);
+          });
+      }
+    }
   }
 };
 </script>
@@ -457,18 +411,20 @@ export default {
 .ivu-form {
   font-size: 15px;
 }
+
 .ivu-form-item {
   margin-bottom: 4px;
   vertical-align: top;
   zoom: 1;
 }
+
 .disabled_field {
-  overflow: hidden;
+  position: relative;
   display: inline-block;
+  overflow: hidden;
   width: 100%;
   height: 100%;
-  position: relative;
-  line-height: 32px;
   color: rgba(0, 0, 0, 0.4);
+  line-height: 32px;
 }
 </style>

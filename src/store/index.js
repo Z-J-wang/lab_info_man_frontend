@@ -1,8 +1,8 @@
-import Vue from "vue";
-import Vuex from "vuex";
-import axios from "axios";
-import jwt from "jwt-decode";
-import { otherRouter, appRouters } from "../router/routers";
+import Vue from 'vue';
+import Vuex from 'vuex';
+import axios from 'axios';
+import jwt from 'jwt-decode';
+import { otherRouter, appRouters } from '../router/routers';
 
 // const axios = Axios.create({
 //   baseURL: "http://localhost:6061",
@@ -21,9 +21,9 @@ const store = new Vuex.Store({
     currentPath: [],
     openNames: [],
     userid: null,
-    expire: "",
-    username: "",
-    token: ""
+    expire: '',
+    username: '',
+    token: ''
   },
   getters: {},
   mutations: {
@@ -43,17 +43,17 @@ const store = new Vuex.Store({
       state.currentPath = pathArr;
     },
     removeStorage: state => {
-      localStorage.removeItem("token");
+      localStorage.removeItem('token');
     }
   },
   actions: {
     login: (context, data) => {
       return new Promise((resolve, reject) => {
         axios
-          .post("/api/v1/account/obtain_token/", data)
+          .post('/api/v1/account/obtain_token/', data)
           .then(resp => {
-            context.commit("updateToken", resp.data.token);
-            context.commit("decodeToken", resp.data.token);
+            context.commit('updateToken', resp.data.token);
+            context.commit('decodeToken', resp.data.token);
             resolve(resp);
           })
           .catch(error => {
@@ -62,12 +62,12 @@ const store = new Vuex.Store({
       });
     },
     logout: context => {
-      context.commit("removeStorage");
+      context.commit('removeStorage');
     },
     api_workflows: context => {
       return new Promise((resolve, reject) => {
         axios
-          .get("/api/v1/service/workflows/")
+          .get('/api/v1/service/workflows/')
           .then(resp => {
             resolve(resp);
           })
@@ -91,7 +91,7 @@ const store = new Vuex.Store({
     api_post_ticket: (context, data) => {
       return new Promise((resolve, reject) => {
         axios
-          .post("/api/v1/service/create_ticket/", data)
+          .post('/api/v1/service/create_ticket/', data)
           .then(resp => {
             resolve(resp);
           })
@@ -101,16 +101,16 @@ const store = new Vuex.Store({
       });
     },
     api_get_ticket_list: (context, params) => {
-      var url = "";
+      var url = '';
       let keys = Object.keys(params);
       var query = [];
       if (keys.length > 0) {
         for (let i = 0; i < keys.length; i++) {
           query.push(`${keys[i]}=${params[keys[i]]}`);
         }
-        url = `/api/v1/service/tickets/?${query.join("&")}`;
+        url = `/api/v1/service/tickets/?${query.join('&')}`;
       } else {
-        url = "/api/v1/service/tickets/";
+        url = '/api/v1/service/tickets/';
       }
       console.log(url);
       return new Promise((resolve, reject) => {
@@ -189,7 +189,7 @@ const store = new Vuex.Store({
     api_fetch_account_list: context => {
       return new Promise((resolve, reject) => {
         axios
-          .get("/api/v1/account/users/fetch-users/")
+          .get('/api/v1/account/users/fetch-users/')
           .then(resp => {
             resolve(resp);
           })

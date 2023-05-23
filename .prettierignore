@@ -1,6 +1,9 @@
 node_modules
 /dist
 assets/lib/
-.*ignore
 yarn.lock
 package-lock.json
+/dist
+/src/assets/ueditor
+/static
+index.html

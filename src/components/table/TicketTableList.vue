@@ -6,10 +6,10 @@
 
 <script>
 export default {
-  name: 'ticket-table-list',
+  name: 'TicketTableList',
   props: {
-    columns: {type: Array},
-    data: {type: Array}
+    columns: { type: Array },
+    data: { type: Array }
   }
-}
+};
 </script>
