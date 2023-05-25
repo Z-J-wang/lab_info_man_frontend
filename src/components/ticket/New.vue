@@ -10,9 +10,9 @@
     </div>
     <div v-if="workflow" class="new-form-con">
       <Card style="text-align: left;">
-        <template v-cloak slot="title"
-          ><span style="font-weight: 700;">{{ workflowTitle }}</span></template
-        >
+        <template slot="title">
+          <span style="font-weight: 700;">{{ workflowTitle }}</span>
+        </template>
         <div v-if="!fieldEmpty" class="form">
           <Form ref="newForm" :model="newForm" :rules="newFormRules" :label-width="150">
             <Row>
@@ -23,25 +23,32 @@
               >
                 <FormItem :label="item.name || item.field_name" :prop="item.field_key">
                   <Input
-                    v-if="item.field_type_id === 5"
+                    v-if="item.field_type_id === 5 || item.field_type_id === 20"
                     v-model="newForm[item.field_key]"
                     :placeholder="$t(`field_label.${item.field_key}`)"
-                  ></Input>
+                  />
+                  <InputNumber
+                    v-if="item.field_type_id === 10"
+                    v-model="newForm[item.field_key]"
+                    :min="0"
+                    :step="1"
+                    style="width: 100%;"
+                  />
                   <InputNumber
                     v-if="item.field_type_id === 15"
                     v-model="newForm[item.field_key]"
                     :min="0"
                     :step="0.5"
                     style="width: 100%;"
-                  ></InputNumber>
+                  />
                   <DatePicker
-                    v-if="item.field_type_id === 30"
+                    v-if="item.field_type_id === 25 || item.field_type_id === 30"
                     v-model="newForm[item.field_key]"
                     type="datetime"
                     format="yyyy-MM-dd HH:mm:ss"
                     style="width: 100%;"
                     :placeholder="$t(`field_label.${item.field_key}`)"
-                  ></DatePicker>
+                  />
                   <!-- TODO: ElementUI/iView对于动态v-model都有BUG，改用单选菜单方式 -->
                   <!-- <el-radio-group v-if="item.field_type_id === 35" v-model="newForm[item.field_key]">
                     <el-radio v-for="(choice, i) in Object.keys(item.field_choice)" :key="i" :label="choice">{{item.field_choice[choice]}}</el-radio>
@@ -55,33 +62,29 @@
                     multiple
                     :placeholder="$t(`field_label.${item.field_key}`)"
                   >
-                    <Option v-for="(choice, i) in Object.keys(item.field_choice)" :key="i" :value="choice">{{
-                      item.field_choice[choice]
-                    }}</Option>
+                    <Option v-for="(choice, i) in Object.keys(item.field_choice)" :key="i" :value="choice">
+                      {{ item.field_choice[choice] }}
+                    </Option>
                   </Select>
                   <Select
                     v-if="item.field_type_id === 45 || item.field_type_id === 35"
                     v-model="newForm[item.field_key]"
                     :placeholder="$t(`field_label.${item.field_key}`)"
                   >
-                    <Option v-for="(choice, i) in Object.keys(item.field_choice)" :key="i" :value="choice">{{
-                      item.field_choice[choice]
-                    }}</Option>
+                    <Option v-for="(choice, i) in Object.keys(item.field_choice)" :key="i" :value="choice">
+                      {{ item.field_choice[choice] }}
+                    </Option>
                   </Select>
                   <!-- <tinymce v-if="item.field_type_id === 55" v-model="newForm[item.field_key]" :id="item.field_key" :other_option="tinymceOptions"></tinymce> -->
-                  <ueditor
-                    v-if="item.field_type_id === 55"
-                    ueditor-config="ueditorConfig"
-                    @ready="handleReady"
-                  ></ueditor>
+                  <ueditor v-if="item.field_type_id === 55" ueditor-config="ueditorConfig" @ready="handleReady" />
                   <Select
                     v-if="item.field_type_id === 60"
                     v-model="newForm[item.field_key]"
                     :placeholder="$t(`field_label.${item.field_key}`)"
                   >
-                    <Option v-for="(user, index) in accountList" :key="index" :value="user.username">{{
-                      user.alias
-                    }}</Option>
+                    <Option v-for="(user, index) in accountList" :key="index" :value="user.username">
+                      {{ user.alias }}
+                    </Option>
                   </Select>
                   <Select
                     v-if="item.field_type_id === 70"
@@ -89,9 +92,9 @@
                     multiple
                     :placeholder="$t(`field_label.${item.field_key}`)"
                   >
-                    <Option v-for="(user, index) in accountList" :key="index" :value="user.username">{{
-                      user.alias
-                    }}</Option>
+                    <Option v-for="(user, index) in accountList" :key="index" :value="user.username">
+                      {{ user.alias }}
+                    </Option>
                   </Select>
                 </FormItem>
               </Col>
@@ -128,9 +131,7 @@ import ueditor from './components/ueditor';
 
 export default {
   name: 'New',
-  components: {
-    ueditor
-  },
+  components: { ueditor },
   data() {
     return {
       loading: false,
@@ -202,6 +203,7 @@ export default {
       this.loading = true;
       this.$store.dispatch('api_init_state', { id: workflow.value }).then(resp => {
         this.init_state = resp.data.data;
+        console.log(this.init_state);
         if (resp.data.code === -1) {
           alert(resp.data.msg);
         }

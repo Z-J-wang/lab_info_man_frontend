@@ -69,7 +69,7 @@ export default {
   },
   data() {
     return {
-      shrink: true
+      shrink: false
     };
   },
   computed: {
