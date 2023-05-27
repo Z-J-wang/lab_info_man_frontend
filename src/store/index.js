@@ -64,6 +64,8 @@ const store = new Vuex.Store({
     logout: context => {
       context.commit('removeStorage');
     },
+
+    // 获取 workflows 数据列表
     api_workflows: context => {
       return new Promise((resolve, reject) => {
         axios
@@ -88,6 +90,8 @@ const store = new Vuex.Store({
           });
       });
     },
+
+    // 创建工单
     api_post_ticket: (context, data) => {
       return new Promise((resolve, reject) => {
         axios
@@ -100,6 +104,8 @@ const store = new Vuex.Store({
           });
       });
     },
+
+    // 获取工单列表
     api_get_ticket_list: (context, params) => {
       var url = '';
       let keys = Object.keys(params);
@@ -123,6 +129,8 @@ const store = new Vuex.Store({
           });
       });
     },
+
+    // 获取工单详情
     api_get_ticket_detail: (context, params) => {
       let url = `/api/v1/service/tickets/${params.id}/`;
       return new Promise((resolve, reject) => {
@@ -136,6 +144,8 @@ const store = new Vuex.Store({
           });
       });
     },
+
+    // 获取工单处理进度
     api_get_ticket_step_list: (context, params) => {
       return new Promise((resolve, reject) => {
         axios
@@ -148,6 +158,8 @@ const store = new Vuex.Store({
           });
       });
     },
+
+    // 获取工单操日志
     api_get_ticket_transiton_list: (context, params) => {
       return new Promise((resolve, reject) => {
         axios
@@ -172,6 +184,8 @@ const store = new Vuex.Store({
           });
       });
     },
+
+    // 工单处理
     api_handle_ticket_action: (context, data) => {
       let url = `/api/v1/service/tickets/${data.id}/`;
       return new Promise((resolve, reject) => {
@@ -185,6 +199,8 @@ const store = new Vuex.Store({
           });
       });
     },
+
+    // 获取用户列表
     api_fetch_account_list: context => {
       return new Promise((resolve, reject) => {
         axios

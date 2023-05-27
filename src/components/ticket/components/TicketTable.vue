@@ -109,8 +109,8 @@ export default {
       type && (params.workflow_ids = type);
       creator && (params.creator = creator);
       sn && (params.sn = sn);
-      dateRange[0] && (params.create_start = dateRange[0]);
-      dateRange[1] && (params.create_end = dateRange[1]);
+      dateRange && dateRange[0] && (params.create_start = dateRange[0]);
+      dateRange && dateRange[1] && (params.create_end = dateRange[1]);
 
       return params;
     }
