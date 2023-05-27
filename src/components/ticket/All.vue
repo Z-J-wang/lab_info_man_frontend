@@ -1,7 +1,8 @@
 <template>
   <div class="container">
+    <Toolbar :params.sync="filterParams" @search="search" />
     <Card>
-      <Table :columns="datatable.columns" :data="datatable.data" size="small"></Table>
+      <Table :columns="dataTable.columns" :data="dataTable.data" size="small"></Table>
       <br />
       <Page :total="total" show-sizer show-total size="small" @on-change="handleChangePage"></Page>
     </Card>
@@ -10,12 +11,14 @@
 
 <script>
 import Buttons from '../../utils/buttons';
+import ToolbarMixin from '@/mixins/Toolbar.js';
 
 export default {
   name: 'All',
+  mixins: [ToolbarMixin],
   data() {
     return {
-      datatable: {
+      dataTable: {
         columns: [
           {
             key: 'sn',
@@ -35,7 +38,7 @@ export default {
             align: 'center',
             width: 150,
             render: (h, params) => {
-              return h('div', [h('span', {}, params.row.workflow.workflow_name)]);
+              return h('div', [h('span', {}, params.row.workflow_info.workflow_name)]);
             }
           },
           {
@@ -89,7 +92,7 @@ export default {
       this.$store
         .dispatch('api_get_ticket_list', { category: 'all' })
         .then(resp => {
-          this.datatable.data = resp.data.data.value;
+          this.dataTable.data = resp.data.data.value;
           this.total = resp.data.data.total;
         })
         .catch(error => {
@@ -98,9 +101,20 @@ export default {
     },
     handleChangePage(page) {
       this.$store
-        .dispatch('api_get_ticket_list', { category: 'all', page: page })
+        .dispatch('api_get_ticket_list', { ...this.formatParams, category: 'all', page: page })
         .then(resp => {
-          this.datatable.data = resp.data.data.value;
+          this.dataTable.data = resp.data.data.value;
+          this.total = resp.data.data.total;
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    },
+    search() {
+      this.$store
+        .dispatch('api_get_ticket_list', { ...this.formatParams, category: 'all', page: 1 })
+        .then(resp => {
+          this.dataTable.data = resp.data.data.value;
           this.total = resp.data.data.total;
         })
         .catch(error => {

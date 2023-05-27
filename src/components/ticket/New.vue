@@ -25,7 +25,6 @@
                   <Input
                     v-if="item.field_type_id === 5 || item.field_type_id === 20"
                     v-model="newForm[item.field_key]"
-                    :placeholder="$t(`field_label.${item.field_key}`)"
                   />
                   <InputNumber
                     v-if="item.field_type_id === 10"
@@ -47,7 +46,6 @@
                     type="datetime"
                     format="yyyy-MM-dd HH:mm:ss"
                     style="width: 100%;"
-                    :placeholder="$t(`field_label.${item.field_key}`)"
                   />
                   <!-- TODO: ElementUI/iView对于动态v-model都有BUG，改用单选菜单方式 -->
                   <!-- <el-radio-group v-if="item.field_type_id === 35" v-model="newForm[item.field_key]">
@@ -56,12 +54,7 @@
                   <!-- <RadioGroup v-if="item.field_type_id === 35" v-model="newForm[item.field_key]">
                     <Radio v-for="(choice, i) in Object.keys(item.field_choice)" :key="i" :label="choice">{{item.field_choice[choice]}}</Radio>
                   </RadioGroup> -->
-                  <Select
-                    v-if="item.field_type_id === 40"
-                    v-model="newForm[item.field_key]"
-                    multiple
-                    :placeholder="$t(`field_label.${item.field_key}`)"
-                  >
+                  <Select v-if="item.field_type_id === 40" v-model="newForm[item.field_key]" multiple>
                     <Option v-for="(choice, i) in Object.keys(item.field_choice)" :key="i" :value="choice">
                       {{ item.field_choice[choice] }}
                     </Option>
@@ -69,7 +62,6 @@
                   <Select
                     v-if="item.field_type_id === 45 || item.field_type_id === 35"
                     v-model="newForm[item.field_key]"
-                    :placeholder="$t(`field_label.${item.field_key}`)"
                   >
                     <Option v-for="(choice, i) in Object.keys(item.field_choice)" :key="i" :value="choice">
                       {{ item.field_choice[choice] }}
@@ -77,21 +69,12 @@
                   </Select>
                   <!-- <tinymce v-if="item.field_type_id === 55" v-model="newForm[item.field_key]" :id="item.field_key" :other_option="tinymceOptions"></tinymce> -->
                   <ueditor v-if="item.field_type_id === 55" ueditor-config="ueditorConfig" @ready="handleReady" />
-                  <Select
-                    v-if="item.field_type_id === 60"
-                    v-model="newForm[item.field_key]"
-                    :placeholder="$t(`field_label.${item.field_key}`)"
-                  >
+                  <Select v-if="item.field_type_id === 60" v-model="newForm[item.field_key]">
                     <Option v-for="(user, index) in accountList" :key="index" :value="user.username">
                       {{ user.alias }}
                     </Option>
                   </Select>
-                  <Select
-                    v-if="item.field_type_id === 70"
-                    v-model="newForm[item.field_key]"
-                    multiple
-                    :placeholder="$t(`field_label.${item.field_key}`)"
-                  >
+                  <Select v-if="item.field_type_id === 70" v-model="newForm[item.field_key]" multiple>
                     <Option v-for="(user, index) in accountList" :key="index" :value="user.username">
                       {{ user.alias }}
                     </Option>

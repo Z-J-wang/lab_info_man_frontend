@@ -112,7 +112,6 @@ const store = new Vuex.Store({
       } else {
         url = '/api/v1/service/tickets/';
       }
-      console.log(url);
       return new Promise((resolve, reject) => {
         axios
           .get(url)
