@@ -68,7 +68,7 @@ export default {
         type: '',
         creator: '',
         sn: '',
-        dateRange: null
+        dateRange: []
       },
       typeOptions: []
     };
