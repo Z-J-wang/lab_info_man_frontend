@@ -7,6 +7,7 @@ import { router } from './router/index';
 import iView from 'iview';
 import { RadioGroup, Radio } from 'element-ui';
 import 'iview/dist/styles/iview.css';
+import './assets/css/common.css';
 import axios from 'axios';
 import store from './store/index';
 import '../static/ueditor/ueditor.config';

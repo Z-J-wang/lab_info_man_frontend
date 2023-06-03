@@ -110,5 +110,4 @@ export default {
 
 <style lang="less">
 @import '../assets/css/layout.less';
-@import '../assets/css/common.less';
 </style>

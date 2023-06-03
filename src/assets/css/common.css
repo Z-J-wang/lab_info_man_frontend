@@ -1,0 +1,174 @@
+.container {
+  width: 1170px;
+}
+
+ul {
+  list-style: none;
+}
+
+.ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* 盒子 start */
+.full-width {
+  width: 100%;
+}
+
+.full-height {
+  height: 100%;
+}
+
+.screen-width {
+  width: 100vw;
+}
+
+.screen-height {
+  height: 100vh;
+}
+
+.p-a {
+  padding: 16px;
+}
+
+.p-l {
+  padding-left: 16px;
+}
+
+.p-r {
+  padding-right: 16px;
+}
+
+.p-b {
+  padding-bottom: 16px;
+}
+
+.p-t {
+  padding-top: 16px;
+}
+
+.p-tb {
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+
+.p-lr {
+  padding-right: 16px;
+  padding-left: 16px;
+}
+
+.p-none {
+  padding: 0;
+}
+
+.m-l {
+  margin-left: 16px;
+}
+
+.m-r {
+  margin-right: 16px;
+}
+
+.m-t {
+  margin-top: 16px;
+}
+
+.m-b {
+  margin-bottom: 16px;
+}
+
+.m-tb {
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
+
+.m-lr {
+  margin-right: 16px;
+  margin-left: 16px;
+}
+
+.m-none {
+  margin: 0;
+}
+
+.m-auto {
+  margin: 0 auto;
+}
+
+.bg-white {
+  background-color: #ffffff;
+}
+
+/* 盒子模型 end */
+
+/* 行内元素 start */
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-white {
+  color: white;
+}
+
+.text-bold {
+  font-weight: bold;
+}
+
+.text-red {
+  color: red;
+}
+
+.text-green {
+  color: green;
+}
+
+.text-blue {
+  color: blue;
+}
+
+.text-gray {
+  color: gray;
+}
+
+.text-black {
+  color: black;
+}
+
+.text-maroon {
+  color: maroon;
+}
+
+.text-purple {
+  color: purple;
+}
+
+/* 行内元素 end */
+
+/* flex布局 start */
+.flex {
+  display: flex;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.nowrap {
+  white-space: nowrap;
+}
+
+/* flex布局 end */

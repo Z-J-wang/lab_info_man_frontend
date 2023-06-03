@@ -15,7 +15,7 @@ export const router = new Router({
 router.beforeEach((to, from, next) => {
   iView.LoadingBar.start();
   let now = new Date();
-  if (!['login', '404'].includes(to.name)) {
+  if (!['login', '404', 'home'].includes(to.name)) {
     if (localStorage.token) {
       store.commit('decodeToken');
       if (store.state.expire >= now) {

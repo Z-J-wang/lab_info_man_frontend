@@ -39,7 +39,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     hot: true,
     contentBase: false, // since we use CopyWebpackPlugin.
     compress: true,
-    host: ip,
+    host: 'localhost',
     port: PORT || config.dev.port,
     open: config.dev.autoOpenBrowser,
     overlay: config.dev.errorOverlay ? { warnings: false, errors: true } : false,
@@ -89,12 +89,7 @@ module.exports = new Promise((resolve, reject) => {
       devWebpackConfig.plugins.push(
         new FriendlyErrorsPlugin({
           compilationSuccessInfo: {
-            messages: [
-              `Your application is running here:
-            http://localhost:${port}
-            http://${ip}:${port}
-            `
-            ]
+            messages: [`Your application is running here:\n\thttp://localhost:${port}\n\thttp://${ip}:${port} `]
           },
           onErrors: config.dev.notifyOnErrors ? utils.createNotifierCallback() : undefined
         })

@@ -1,4 +1,11 @@
 import LayOut from '../components/LayOut';
+import BaseLayout from '../components/layout/BaseLayout.vue';
+
+export const homeRouter = {
+  path: '/',
+  component: BaseLayout,
+  children: [{ path: '', name: 'home', component: () => import('../components/Home.vue') }]
+};
 
 export const loginRouter = {
   path: '/login',
@@ -8,7 +15,7 @@ export const loginRouter = {
 };
 
 export const otherRouter = {
-  path: '/',
+  path: '/user',
   name: 'otherRouter',
   component: LayOut,
   redirect: '/ticket/new',
@@ -117,4 +124,4 @@ export const appRouters = [
   }
 ];
 
-export const routers = [otherRouter, ...appRouters, loginRouter];
+export const routers = [homeRouter, otherRouter, ...appRouters, loginRouter];
